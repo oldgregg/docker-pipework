@@ -375,7 +375,7 @@ _process_container ()
         sleep $cleanup_wait
 
         for ovs_info in `ovs-vsctl --no-heading --columns=external-ids find Interface external-ids:pipework.containerid=$containerid | tr -d [:blank:]`; do
-         interface_info=$(echo "$ovs_info" | sed 's/pipework.\([^=]*\)=/"pipework.\1":/g' | jq -r '."pipework.bridge", ."pipework.interface"' | xargs);
+            interface_info=$(echo "$ovs_info" | sed 's/pipework.\([^=]*\)=/"pipework.\1":/g' | jq -r '."pipework.bridge", ."pipework.interface"' | xargs);
             ovs-vsctl del-port $interface_info
         done
 
